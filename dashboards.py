@@ -8,7 +8,7 @@ st.set_page_config(layout="wide")
 st.title("Ondas de Calor")
 
 # Carregar o CSV
-df = pd.read_csv("/Users/joaovyctor/IC-INPE/dados/dados_Media-IC.csv")
+df = pd.read_csv("/Users/joaovyctor/Documents/GitHub/Temperature-Dashboards/dados/dados_Media-IC.csv")
 
 # Converter coluna de time em datetime
 df["time"] = pd.to_datetime(df["time"])
@@ -29,7 +29,7 @@ anoInicial = pd.to_datetime(anoInicial)
 anoFinal = pd.to_datetime(anoFinal)
 
 # DataFrame filtrado
-#df = df[(df['time'] >= anoInicial) & (df['time'] <= anoFinal)]
+df = df[(df['time'] >= anoInicial) & (df['time'] <= anoFinal)]
 
 # Divide a tela em colunas para adicionar gráficos
 coluna1, coluna2 = st.columns(2)

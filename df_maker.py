@@ -2,7 +2,7 @@ import xarray as xr
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv("/Users/joaovyctor/IC-INPE/dados/dados-IC.csv")
+df = pd.read_csv("/Users/joaovyctor/Documents/GitHub/Temperature-Dashboards/dados/dados_Media-IC.csv")
 
 # Converter a coluna 'time' para o formato de data
 df['time'] = pd.to_datetime(df['time'])
