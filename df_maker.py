@@ -2,7 +2,7 @@ import xarray as xr
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv("/Users/joaovyctor/Documents/GitHub/Temperature-Dashboards/dados/dados_Media-IC.csv")
+df = pd.read_csv("/home/joao/Documentos/GitHub/Temperature-Dashboards/dados/dados-IC (2).csv")
 
 # Converter a coluna 'time' para o formato de data
 df['time'] = pd.to_datetime(df['time'])
@@ -16,7 +16,6 @@ df = df.groupby('time')['t2m'].mean().reset_index()
 
 df['t2m'] = df['t2m'].round()
 
-df['state'] = 'São Paulo'
 
 # Mostrar o resultado
 print(df)

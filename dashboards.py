@@ -8,7 +8,7 @@ st.set_page_config(layout="wide")
 st.title("Ondas de Calor")
 
 # Carregar o CSV
-df = pd.read_csv("/Users/joaovyctor/Documents/GitHub/Temperature-Dashboards/dados/dados_Media-IC.csv")
+df = pd.read_csv("dados/dados_Media-IC.csv")
 
 # Converter coluna de time em datetime
 df["time"] = pd.to_datetime(df["time"])
