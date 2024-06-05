@@ -4,7 +4,7 @@ import streamlit as st
 import numpy as np
 
 st.set_page_config(layout="wide")
-st.title("Ondas de Calor")
+st.title("TMAX")
 
 df = pd.read_csv("dados/dados_TMAX-IC.csv")
 df["time"] = pd.to_datetime(df["time"])
@@ -24,16 +24,17 @@ df = df[df['state'] == estado]  # Filtra os dados pelo estado selecionado
 df = df.drop(columns=['Unnamed: 0'])
 
 coluna1, coluna2 = st.columns(2)
+coluna3, coluna4 = st.columns(2)
 
 df_JFM = df[df['time'].dt.month.isin([1, 2, 3])]
 df_AMJ = df[df['time'].dt.month.isin([4, 5, 6])]
 df_JAS = df[df['time'].dt.month.isin([7, 8, 9])]
 df_OND = df[df['time'].dt.month.isin([10, 11, 12])]
 
-percentil_JFM = np.percentile(df_JFM['temperature'], 90)
-percentil_AMJ = np.percentile(df_AMJ['temperature'], 90)
-percentil_JAS = np.percentile(df_JAS['temperature'], 90)
-percentil_OND = np.percentile(df_OND['temperature'], 90)
+percentil_JFM = np.percentile(df_JFM['t2m'], 90)
+percentil_AMJ = np.percentile(df_AMJ['t2m'], 90)
+percentil_JAS = np.percentile(df_JAS['t2m'], 90)
+percentil_OND = np.percentile(df_OND['t2m'], 90)
 
 def plot_percentil(trimestre):
     if trimestre == "JFM":
@@ -49,7 +50,7 @@ def plot_percentil(trimestre):
         df_trimestre = df_OND
         percentil = percentil_OND
     
-    fig = px.line(df_trimestre, x='time', y='temperature', labels={'time': 'Data', 'temperature': 'Valor'}, title=f'Dados do trimestre {trimestre} e P90')
+    fig = px.scatter(df_trimestre, x='time', y='t2m', labels={'time': 'Data', 't2m': 'Valor'}, title=f'Dados do trimestre {trimestre} e P90')
     fig.add_hline(y=percentil, line_dash="dot", line_color="red", annotation_text=f'P90 {trimestre}', annotation_position="top right")
     return fig
 
@@ -67,4 +68,4 @@ def filtrar_df(trimestre):
         df_trimestre = df_OND
     return df_trimestre
 
-coluna2.write(filtrar_df(trimestre))
+coluna3.write(filtrar_df(trimestre))
